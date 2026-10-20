@@ -1,209 +1,189 @@
 # API de Gerenciamento Acadêmico
 
-API REST para gerenciamento de pessoas em um contexto acadêmico,
-desenvolvida como parte de um teste técnico com Java e Spring Boot.
-
-> **Status atual:** modelagem JPA implementada e operações de criação e
-> consulta de pessoas disponíveis. Atualização, exclusão, validações,
-> tratamento padronizado de erros e testes automatizados de CRUD ainda
-> precisam ser concluídos.
+API REST em Java com Spring Boot para implementar CRUDs usando Spring Data JPA/Hibernate e banco H2 em memória.
 
 ## Tecnologias
 
--   Java 21
--   Spring Boot 4.1.1
--   Maven
--   Spring Data JPA / Hibernate
--   H2 Database em memória
--   Jakarta Persistence (JPA)
+- Java 21
+- Spring Boot 4
+- Maven
+- Spring Web
+- Spring Data JPA / Hibernate
+- H2 Database
+- JUnit / Spring Boot Test
 
-## Como executar
+## Modelo de domínio
 
-No Windows PowerShell, na raiz do projeto:
+- `Person`: nome, telefone, e-mail, status e relacionamento com endereços.
+- `Student extends Person`: número de matrícula e foto.
+- `Professor extends Person`: salário.
+- `Address`: rua, cidade, estado, CEP e país; cada endereço pertence a uma pessoa.
+- `Status`: `ACTIVE` ou `DISABLE`.
 
-``` powershell
-.\mvnw.cmd spring-boot:run
-```
+A herança usa `InheritanceType.JOINED`: os atributos comuns ficam em `PERSON`, e os atributos específicos ficam em `STUDENT` ou `PROFESSOR`, relacionados pelo mesmo ID.
 
-Para executar os testes:
+### Interpretação do diagrama
 
-``` powershell
-.\mvnw.cmd test
-```
+O diagrama não esclarece se uma pessoa pode ser aluno e professor ao mesmo tempo, nem se é possível mudar de um tipo para outro. Para manter o escopo objetivo, esta implementação cria diretamente um `Student` ou um `Professor` por seus respectivos endpoints. Os tipos são tratados como cadastros distintos; conversão entre subtipos não foi implementada.
 
-A aplicação fica disponível, por padrão, em `http://localhost:8080`.
+A tabela `PERSON` isoladamente não contém uma coluna discriminadora de tipo. O tipo pode ser identificado pela existência do mesmo ID em `STUDENT` ou `PROFESSOR`, ou por uma consulta com `LEFT JOIN`.
 
-## Endpoints disponíveis
+## Endpoints
 
-### Health check
+### Pessoas
 
-`GET /api/health`
+| Método | Endpoint | Descrição |
+|---|---|---|
+| POST | `/api/persons` | Criar pessoa |
+| GET | `/api/persons` | Listar pessoas |
+| GET | `/api/persons/{id}` | Buscar pessoa |
+| PUT | `/api/persons/{id}` | Atualizar campos comuns |
+| PATCH | `/api/persons/{id}` | Atualizar parcialmente |
+| DELETE | `/api/persons/{id}` | Excluir pessoa |
 
-URL local: `http://localhost:8080/api/health`
+### Alunos
 
-Resposta esperada: `API Academic Management está funcionando!`
+| Método | Endpoint | Descrição |
+|---|---|---|
+| POST | `/api/students` | Criar aluno |
+| GET | `/api/students` | Listar alunos |
+| GET | `/api/students/{id}` | Buscar aluno |
+| PUT | `/api/students/{id}` | Atualizar aluno |
+| PATCH | `/api/students/{id}` | Atualizar parcialmente |
+| DELETE | `/api/students/{id}` | Excluir aluno |
 
-### Criar pessoa
+### Professores
 
-`POST /api/persons`
+| Método | Endpoint | Descrição |
+|---|---|---|
+| POST | `/api/professors` | Criar professor |
+| GET | `/api/professors` | Listar professores |
+| GET | `/api/professors/{id}` | Buscar professor |
+| PUT | `/api/professors/{id}` | Atualizar professor |
+| PATCH | `/api/professors/{id}` | Atualizar parcialmente |
+| DELETE | `/api/professors/{id}` | Excluir professor |
 
-Exemplo de corpo JSON:
+### Endereços
 
-``` json
+| Método | Endpoint | Descrição |
+|---|---|---|
+| POST | `/api/addresses` | Criar endereço associado a uma pessoa |
+| GET | `/api/addresses` | Listar endereços |
+| GET | `/api/addresses/{id}` | Buscar endereço |
+| PUT | `/api/addresses/{id}` | Atualizar endereço |
+| PATCH | `/api/addresses/{id}` | Atualizar parcialmente |
+| DELETE | `/api/addresses/{id}` | Excluir endereço |
+
+### Saúde
+
+- `GET /api/health`: verifica se a API está respondendo.
+
+## Exemplos de requisições
+
+### Criar aluno — `POST /api/students`
+
+```json
 {
-  "name": "Eduardo",
+  "name": "Eduardo Constantino",
   "phoneNumber": "41999999999",
-  "emailAddress": "teste@gmail.com",
-  "status": "ACTIVE"
+  "emailAddress": "ducontageral@email.com",
+  "status": "ACTIVE",
+  "studentNumber": "2026001",
+  "photo": "du.jpg"
 }
 ```
 
-Em caso de sucesso, retorna o objeto criado com o identificador gerado e
-HTTP `201 Created`.
+### Criar professor — `POST /api/professors`
 
-### Listar pessoas
-
-`GET /api/persons`
-
-Retorna uma lista JSON com as pessoas cadastradas.
-
-### Consultar pessoa por ID
-
-`GET /api/persons/{id}`
-
-Exemplo: `GET http://localhost:8080/api/persons/1`
-
-Retorna a pessoa correspondente ao ID informado, se encontrada. O
-tratamento específico para IDs inexistentes será aprimorado para
-retornar HTTP `404 Not Found`.
-
-O endpoint de criação recebe uma pessoa por requisição; o cadastro de
-várias pessoas em uma única chamada ainda não foi implementado.
-
-## Banco de dados H2
-
-A aplicação utiliza H2 em memória, configurado em
-`src/main/resources/application.yaml`.
-
-``` yaml
-spring:
-  application:
-    name: api-bj-management
-
-  datasource:
-    url: jdbc:h2:mem:academicdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-
-  jpa:
-    hibernate:
-      ddl-auto: create
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+```json
+{
+  "name": "Maria Antonieta",
+  "phoneNumber": "41988887777",
+  "emailAddress": "maria@universidade.com",
+  "status": "ACTIVE",
+  "salary": 8500.00
+}
 ```
 
-Com `ddl-auto: create`, o Hibernate recria o esquema a partir das
-entidades ao iniciar. Como o banco é em memória, os dados são perdidos
-ao encerrar a aplicação.
+### Criar endereço — `POST /api/addresses`
 
-Para abrir o console, acesse `http://localhost:8080/h2-console` com:
+Substitua o ID abaixo pelo ID real de uma pessoa, aluno ou professor existente.
 
-  Campo       Valor
-  ----------- --------------------------
-  JDBC URL    `jdbc:h2:mem:academicdb`
-  User Name   `sa`
-  Password    deixar vazio
-
-## Modelagem implementada
-
-As entidades estão no pacote `br.com.bjmanagement.model`.
-
-### Person
-
-Entidade-base com `id`, `name`, `phoneNumber`, `emailAddress`, `status`
-e `addresses`.
-
-O enum `Status` contém `ACTIVE` e `DISABLE`.
-`@Enumerated(EnumType.STRING)` persiste o nome do valor. A estratégia
-`@Inheritance(strategy = InheritanceType.JOINED)` mantém os campos
-comuns na tabela `PERSON` e os específicos das subclasses em tabelas
-próprias.
-
-### Student
-
-Herda de `Person` e adiciona `studentNumber` e `photo`.
-
-### Professor
-
-Herda de `Person` e adiciona `salary`, representado por `BigDecimal`.
-
-### Address
-
-Contém `id`, `street`, `city`, `state`, `zipCode`, `country` e uma
-referência a `Person`. O relacionamento usa `@ManyToOne` em
-`Address.person` e `@OneToMany(mappedBy = "person")` em
-`Person.addresses`.
-
-## Organização em camadas
-
--   **Controller:** recebe requisições HTTP e retorna respostas.
--   **Service:** coordena a lógica da aplicação.
--   **Repository:** utiliza Spring Data JPA para persistência.
--   **Model:** contém entidades e enumerações de domínio.
-
-Estrutura principal atual:
-
-``` text
-src/
-└── main/
-    ├── java/
-    │   └── br/com/bjmanagement/
-    │       ├── ApiBjManagementApplication.java
-    │       ├── controller/
-    │       │   ├── HealthController.java
-    │       │   └── PersonController.java
-    │       ├── model/
-    │       │   ├── Address.java
-    │       │   ├── Person.java
-    │       │   ├── Professor.java
-    │       │   ├── Status.java
-    │       │   └── Student.java
-    │       ├── repository/
-    │       │   └── PersonRepository.java
-    │       └── service/
-    │           └── PersonService.java
-    └── resources/
-        └── application.yaml
+```json
+{
+  "street": "Rua das Flores, 100",
+  "city": "Curitiba",
+  "state": "PR",
+  "zipCode": "80010-000",
+  "country": "Brasil",
+  "person": { "id": 1 }
+}
 ```
 
-## Verificações manuais realizadas
+O serviço verifica se a pessoa existe antes de associar o endereço.
 
--   [x] Aplicação Spring Boot inicia localmente.
--   [x] `GET /api/health` responde.
--   [x] Conexão com H2 em memória.
--   [x] Hibernate cria `PERSON`, `STUDENT`, `PROFESSOR` e `ADDRESS`.
--   [x] `POST /api/persons` cria pessoa e retorna `201 Created`.
--   [x] Cadastro confirmado no console H2.
--   [x] `GET /api/persons` lista pessoas.
--   [x] `GET /api/persons/{id}` consulta uma pessoa por identificador.
+## Banco H2
 
-Essas verificações foram feitas manualmente; os testes automatizados
-ainda precisam ser implementados.
+Console: `http://localhost:8080/h2-console`
 
-## Próximas etapas
+- JDBC URL: `jdbc:h2:mem:bjdb`
+- User: `bj`
+- Password: em branco
 
-1.  Implementar atualização (`PUT`) e exclusão (`DELETE`).
-2.  Criar tratamento adequado para recursos não encontrados.
-3.  Adicionar validações de entrada.
-4.  Criar testes automatizados para as operações CRUD.
-5.  Avaliar DTOs para separar o modelo de persistência do contrato HTTP.
-6.  Preparar Dockerfile e verificar a execução em contêiner.
-7.  Finalizar a documentação e os vídeos solicitados no teste técnico.
+O banco é em memória; os dados são perdidos quando a aplicação é encerrada ou reiniciada.
+
+## Executar
+
+Requisitos: JDK 21 e Maven. Também é possível executar a classe `ApiBjManagementApplication` pelo IntelliJ IDEA.
+
+```bash
+mvn spring-boot:run
+mvn test
+```
+
+No Windows, se o Maven Wrapper estiver configurado:
+
+```powershell
+.\mvnw.cmd spring-boot:run
+.\mvnw.cmd test
+```
+
+## Consultar pessoas e tipos no H2
+
+Esta consulta lista todas as pessoas e exibe os dados específicos de aluno ou professor quando existirem:
+
+```sql
+SELECT
+    p.ID,
+    p.NAME,
+    p.PHONENUMBER,
+    p.EMAILADDRESS,
+    p.STATUS,
+    s.STUDENTNUMBER,
+    s.PHOTO,
+    pr.SALARY,
+    CASE
+        WHEN s.ID IS NOT NULL THEN 'STUDENT'
+        WHEN pr.ID IS NOT NULL THEN 'PROFESSOR'
+        ELSE 'PERSON'
+    END AS PERSON_TYPE
+FROM PERSON p
+LEFT JOIN STUDENT s ON s.ID = p.ID
+LEFT JOIN PROFESSOR pr ON pr.ID = p.ID
+ORDER BY p.ID;
+```
+
+Os `LEFT JOIN`s mantêm na consulta pessoas que não possuem registro em `STUDENT` ou `PROFESSOR`.
+
+## Dados de teste
+
+É possível cadastrar dados manualmente pelos endpoints ou executar SQL no console H2. Como o banco é recriado ao iniciar a aplicação, dados inseridos manualmente precisam ser cadastrados novamente após reiniciar.
+
+Os testes automatizados devem preparar seus próprios dados e verificar os resultados sem depender de registros inseridos manualmente. Testes verificam comportamento; não substituem as instruções de configuração do ambiente.
+
+## Decisões e melhorias futuras
+
+- Alunos e professores recebem os atributos comuns herdados de `Person` e os atributos específicos em uma única requisição.
+- `Address` recebe a referência à pessoa pelo campo `person.id`.
+- Para evitar serialização JSON recursiva entre `Person.addresses` e `Address.person`, a lista de endereços é ignorada na serialização direta de `Person`. Uma resposta agregada poderá ser implementada futuramente com DTOs.
+- Próximas melhorias: tratamento padronizado de exceções, validação de entrada, testes automatizados de CRUD, Docker e upload real de foto.

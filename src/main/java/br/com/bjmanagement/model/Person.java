@@ -1,5 +1,6 @@
 package br.com.bjmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -27,6 +28,8 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    //Evita que a serialização da pessoa inclua os endereços, impedindo o ciclo address -> Person -> Address.
+    @JsonIgnore
     @OneToMany(mappedBy = "person")
     private List<Address> addresses = new ArrayList<>();
 

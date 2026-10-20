@@ -5,7 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d96a696-9a3e-43f3-a800-49375a85fa5b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/controller/AddressController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/controller/ProfessorController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/controller/StudentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/repository/AddressRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/repository/ProfessorRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/repository/StudentRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/service/AddressService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/service/ProfessorService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/service/StudentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/controller/PersonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/controller/PersonController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/model/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/model/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/service/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/service/PersonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/bjmanagement/controller/PersonController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/bjmanagement/controller/PersonController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/bjmanagement/service/PersonService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/bjmanagement/service/PersonService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,67 +39,74 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.6315060617957777" />
-      <entry key="MS500" value="4.955821887595194" />
-      <entry key="S2" value="12.368501237708559" />
-      <entry key="S5" value="19.48433931003586" />
-      <entry key="S10" value="24.261497106971074" />
-      <entry key="S30" value="35.11613515508363" />
-      <entry key="S60" value="45.019497962239804" />
-      <entry key="M2" value="55.397564774022975" />
-      <entry key="M5" value="66.52367239603117" />
-      <entry key="M10" value="72.2167764258533" />
-      <entry key="M15" value="75.00240998808219" />
-      <entry key="M30" value="80.26810561615552" />
-      <entry key="H1" value="86.64648046918533" />
-      <entry key="H2" value="92.53148748728059" />
-      <entry key="H4" value="96.6872133411378" />
-      <entry key="D1" value="101.01980674232551" />
-      <entry key="W1" value="101.85743745897935" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000000256002746" />
+      <entry key="S2" value="1.0207352032840875" />
+      <entry key="S5" value="1.361280115492272" />
+      <entry key="S10" value="2.1684329494368155" />
+      <entry key="S30" value="4.241755198448608" />
+      <entry key="S60" value="5.370254487474116" />
+      <entry key="M2" value="6.152542313070446" />
+      <entry key="M5" value="7.140714891457711" />
+      <entry key="M10" value="8.035209113077602" />
+      <entry key="M15" value="8.518315531879768" />
+      <entry key="M30" value="9.155723019844686" />
+      <entry key="H1" value="9.980538435745432" />
+      <entry key="H2" value="17.341762146489373" />
+      <entry key="H4" value="42.39758490652371" />
+      <entry key="D1" value="120.91506196146454" />
+      <entry key="W1" value="147.07219979737096" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.6887766109424753E-195" />
-      <entry key="MS500" value="1.1104894605568968E-39" />
-      <entry key="S2" value="1.8254864502982833E-10" />
-      <entry key="S5" value="1.2729219175234224E-4" />
-      <entry key="S10" value="0.011554857317551214" />
-      <entry key="S30" value="0.3406088147412636" />
-      <entry key="S60" value="1.319418687189118" />
-      <entry key="M2" value="3.3074458423364743" />
-      <entry key="M5" value="6.290716149243182" />
-      <entry key="M10" value="8.050959498791293" />
-      <entry key="M15" value="9.024809692949752" />
-      <entry key="M30" value="11.237373066611838" />
-      <entry key="H1" value="14.283356132812154" />
-      <entry key="H2" value="17.210575274124295" />
-      <entry key="H4" value="19.305134627478175" />
-      <entry key="D1" value="21.501775238137512" />
-      <entry key="W1" value="21.92751270408393" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="7.209753641490023E-105" />
+      <entry key="S5" value="2.2037815888493275E-42" />
+      <entry key="S10" value="1.4862182315546871E-21" />
+      <entry key="S30" value="1.3224347571632767E-7" />
+      <entry key="S60" value="5.272622165965814E-4" />
+      <entry key="M2" value="0.03784781448307751" />
+      <entry key="M5" value="0.5309736727259322" />
+      <entry key="M10" value="1.3657155929482114" />
+      <entry key="M15" value="1.9143947183194236" />
+      <entry key="M30" value="2.7344642046136163" />
+      <entry key="H1" value="3.3728974199042145" />
+      <entry key="H2" value="4.871452813289074" />
+      <entry key="H4" value="9.250016998903266" />
+      <entry key="D1" value="23.29767201836252" />
+      <entry key="W1" value="28.091712064960646" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.5508432427051047" />
-      <entry key="MS500" value="4.907403168514462" />
-      <entry key="S2" value="12.337921960171968" />
-      <entry key="S5" value="19.46496580017594" />
-      <entry key="S10" value="24.259074917708233" />
-      <entry key="S30" value="35.42743727937806" />
-      <entry key="S60" value="46.27736378469041" />
-      <entry key="M2" value="58.61906430456312" />
-      <entry key="M5" value="72.74445200232394" />
-      <entry key="M10" value="80.22223769155362" />
-      <entry key="M15" value="83.99327613637674" />
-      <entry key="M30" value="91.48475514124435" />
-      <entry key="H1" value="100.91698815488853" />
-      <entry key="H2" value="109.73444926573735" />
-      <entry key="H4" value="115.98811558343519" />
-      <entry key="D1" value="122.52080212123398" />
-      <entry key="W1" value="123.78483669172773" />
+      <entry key="MS100" value="0.9265880618903709" />
+      <entry key="MS500" value="0.9848664674293008" />
+      <entry key="S2" value="1.0166766901600126" />
+      <entry key="S5" value="1.3580375726628944" />
+      <entry key="S10" value="2.1651781810263793" />
+      <entry key="S30" value="4.239505398333583" />
+      <entry key="S60" value="5.369337370662642" />
+      <entry key="M2" value="6.188716520075274" />
+      <entry key="M5" value="7.6665058505194175" />
+      <entry key="M10" value="9.39408737644009" />
+      <entry key="M15" value="10.4260938857921" />
+      <entry key="M30" value="11.885223117937732" />
+      <entry key="H1" value="13.350269701463747" />
+      <entry key="H2" value="22.210826405182697" />
+      <entry key="H4" value="51.64528190684209" />
+      <entry key="D1" value="144.21176755032744" />
+      <entry key="W1" value="175.16374600835684" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -91,6 +114,9 @@
   &quot;fromUser&quot;: false
 }</component>
   <component name="ProjectId" id="3Kw0wD1hEhK1owPIzXffIa7EtRC" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -107,7 +133,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "Spring Boot.ApiBjManagementApplication.executor": "Run",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -125,6 +151,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\EduardoFerreiraConst\projetos-eduardo\api-bj-management" />
       <recent name="J:\projetos pessoais\api-bj-management" />
     </key>
   </component>

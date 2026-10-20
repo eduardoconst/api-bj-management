@@ -33,4 +33,20 @@ public class PersonController {
         return personService.findById(id);
     }
 
+    @PutMapping("/{id}")
+    public Person update(@PathVariable Long id, @RequestBody Person person) {
+        return personService.update(id, person);
+    }
+
+    @PatchMapping("/{id}")
+    public Person patch(@PathVariable Long id, @RequestBody Person person) {
+        return personService.patch(id, person);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        personService.delete(id);
+    }
+
 }

@@ -9,6 +9,7 @@ import java.util.List;
 @Service
 public class PersonService {
 
+    //encapsulamento imutavel PersonRepository
     private final PersonRepository personRepository;
 
     public PersonService(PersonRepository personRepository) {
@@ -28,5 +29,28 @@ public class PersonService {
                 .orElseThrow(() -> new RuntimeException(
                         "Person not found by ID: " + id
                 ));
+    }
+
+    public Person update(Long id, Person person) {
+        Person exist = findById(id);
+        exist.setName(person.getName());
+        exist.setPhoneNumber(person.getPhoneNumber());
+        exist.setEmailAddress(person.getEmailAddress());
+        exist.setStatus(person.getStatus());
+        return personRepository.save(exist);
+    }
+
+    public Person patch(Long id, Person person) {
+        Person exist = findById(id);
+        if (person.getName() != null) {exist.setName(person.getName());}
+        if (person.getPhoneNumber() != null) {exist.setPhoneNumber(person.getPhoneNumber());}
+        if (person.getEmailAddress() != null) {exist.setEmailAddress(person.getEmailAddress());}
+        if (person.getStatus() != null) {exist.setStatus(person.getStatus());}
+        return personRepository.save(exist);
+    }
+
+    public void delete(Long id) {
+        findById(id);
+        personRepository.deleteById(id);
     }
 }
