@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4d96a696-9a3e-43f3-a800-49375a85fa5b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.6315060617957777" />
+      <entry key="MS500" value="4.955821887595194" />
+      <entry key="S2" value="12.368501237708559" />
+      <entry key="S5" value="19.48433931003586" />
+      <entry key="S10" value="24.261497106971074" />
+      <entry key="S30" value="35.11613515508363" />
+      <entry key="S60" value="45.019497962239804" />
+      <entry key="M2" value="55.397564774022975" />
+      <entry key="M5" value="66.52367239603117" />
+      <entry key="M10" value="72.2167764258533" />
+      <entry key="M15" value="75.00240998808219" />
+      <entry key="M30" value="80.26810561615552" />
+      <entry key="H1" value="86.64648046918533" />
+      <entry key="H2" value="92.53148748728059" />
+      <entry key="H4" value="96.6872133411378" />
+      <entry key="D1" value="101.01980674232551" />
+      <entry key="W1" value="101.85743745897935" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.6887766109424753E-195" />
+      <entry key="MS500" value="1.1104894605568968E-39" />
+      <entry key="S2" value="1.8254864502982833E-10" />
+      <entry key="S5" value="1.2729219175234224E-4" />
+      <entry key="S10" value="0.011554857317551214" />
+      <entry key="S30" value="0.3406088147412636" />
+      <entry key="S60" value="1.319418687189118" />
+      <entry key="M2" value="3.3074458423364743" />
+      <entry key="M5" value="6.290716149243182" />
+      <entry key="M10" value="8.050959498791293" />
+      <entry key="M15" value="9.024809692949752" />
+      <entry key="M30" value="11.237373066611838" />
+      <entry key="H1" value="14.283356132812154" />
+      <entry key="H2" value="17.210575274124295" />
+      <entry key="H4" value="19.305134627478175" />
+      <entry key="D1" value="21.501775238137512" />
+      <entry key="W1" value="21.92751270408393" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="1.5508432427051047" />
+      <entry key="MS500" value="4.907403168514462" />
+      <entry key="S2" value="12.337921960171968" />
+      <entry key="S5" value="19.46496580017594" />
+      <entry key="S10" value="24.259074917708233" />
+      <entry key="S30" value="35.42743727937806" />
+      <entry key="S60" value="46.27736378469041" />
+      <entry key="M2" value="58.61906430456312" />
+      <entry key="M5" value="72.74445200232394" />
+      <entry key="M10" value="80.22223769155362" />
+      <entry key="M15" value="83.99327613637674" />
+      <entry key="M30" value="91.48475514124435" />
+      <entry key="H1" value="100.91698815488853" />
+      <entry key="H2" value="109.73444926573735" />
+      <entry key="H4" value="115.98811558343519" />
+      <entry key="D1" value="122.52080212123398" />
+      <entry key="W1" value="123.78483669172773" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3Kw0wD1hEhK1owPIzXffIa7EtRC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Spring Boot.ApiBjManagementApplication.executor": "Run",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "MavenSettings"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="J:\projetos pessoais\api-bj-management" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="ApiBjManagementApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="api-bj-management" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="br.com.bjmanagement.ApiBjManagementApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-a203e0a19954-intellij.indexing.shared.core-IU-262.10968.63" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.10968.63" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4d96a696-9a3e-43f3-a800-49375a85fa5b" name="Changes" comment="" />
+      <created>1792453562004</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1792453562004</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/br/com/bjmanagement/ApiBjManagementApplication.java</url>
+          <line>9</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
