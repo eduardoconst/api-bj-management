@@ -1,0 +1,27 @@
+# Etapa 1: compilar e empacotar a aplicação
+FROM eclipse-temurin:21-jdk AS build
+
+WORKDIR /app
+
+# Copia os arquivos necessários para o Maven Wrapper
+COPY mvnw pom.xml ./
+COPY .mvn .mvn
+
+# Garante que o wrapper possa ser executado no Linux
+RUN chmod +x mvnw
+
+# Baixa as dependências, executa os testes e gera o JAR
+COPY src src
+RUN ./mvnw -B clean package
+
+# Etapa 2: executar a aplicação
+FROM eclipse-temurin:21-jre
+
+WORKDIR /app
+
+# Copia somente o JAR gerado na etapa de compilação
+COPY --from=build /app/target/*.jar app.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "app.jar"]

@@ -1,0 +1,21 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile-api
+    image: bj-management-api
+    container_name: bj-management-api
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-app
+    image: bj-management-app
+    container_name: bj-management-app
+    ports:
+      - "5173:80"
+    depends_on:
+      - api
+    restart: unless-stopped
