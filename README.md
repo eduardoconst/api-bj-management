@@ -14,25 +14,55 @@ API REST desenvolvida em Java com Spring Boot para gerenciamento de pessoas, alu
 
 ## Modelo de domínio
 
+O modelo representa pessoas, alunos, professores e endereços.
+
+![Diagrama do modelo de domínio](docs/diagrama-modelo.png)
+
 - **Person:** nome, telefone, e-mail, status e relacionamento com endereços.
 - **Student:** herda os atributos de `Person` e adiciona número de matrícula e foto.
 - **Professor:** herda os atributos de `Person` e adiciona salário.
 - **Address:** rua, cidade, estado, CEP e país; cada endereço pertence a uma pessoa.
 - **Status:** `ACTIVE` ou `DISABLED`.
 
-A herança utiliza `InheritanceType.JOINED`: os atributos comuns ficam na tabela `PERSON`, enquanto os atributos específicos ficam nas tabelas `STUDENT` e `PROFESSOR`, relacionadas pelo mesmo ID.
+A herança utiliza `InheritanceType.JOINED`: os atributos comuns ficam na tabela `PERSON`, enquanto os atributos específicos ficam nas tabelas `STUDENT` e `PROFESSOR`, relacionadas pelo mesmo ID. Uma pessoa pode possuir vários endereços, mas cada endereço pertence a uma única pessoa.
 
-Uma pessoa pode possuir vários endereços, mas cada endereço pertence a uma única pessoa.
+**Imagem do diagrama:** coloque `diagrama-modelo.png` dentro da pasta `docs`, na raiz do repositório. O caminho esperado é `docs/diagrama-modelo.png`.
+
+## Estrutura da aplicação
+
+O projeto segue uma organização em camadas, separando as responsabilidades de acesso HTTP, regras de negócio, persistência e representação dos dados.
+
+```text
+src/
+├── main/
+│   ├── java/br/com/bjmanagement/
+│   │   ├── controller/
+│   │   ├── service/
+│   │   ├── repository/
+│   │   ├── model/
+│   │   └── exception/
+│   └── resources/
+│       ├── application.properties
+│       └── data.sql
+└── test/
+    └── java/br/com/bjmanagement/
+        ├── repository/
+        └── service/
+```
+
+- **Controller:** recebe as requisições HTTP, direciona as operações para os serviços e retorna as respostas da API.
+- **Service:** concentra a lógica de negócio e coordena as operações antes de acessar os repositórios.
+- **Repository:** utiliza Spring Data JPA para consultar, salvar e excluir registros no banco de dados.
+- **Model:** contém `Person`, `Student`, `Professor` e `Address`, além do enum `Status`.
+- **Exception:** reúne exceções personalizadas e o tratamento global de erros, padronizando respostas para recursos inexistentes e requisições inválidas.
+- **Resources:** contém as configurações da aplicação e o script `data.sql`, responsável pela carga inicial de dados.
+- **Test:** contém testes unitários dos serviços e testes de integração dos repositórios.
+
+Essa separação facilita a manutenção, a leitura do código e os testes isolados das regras de negócio e da persistência.
 
 ## Endpoints
 
 Todos os endpoints utilizam o prefixo `/api`.
-
-### Saúde da aplicação
-
-| Método | Endpoint | Descrição |
-|---|---|---|
-| GET | `/api/health` | Verificar se a API está respondendo |
 
 ### Pessoas
 
@@ -122,7 +152,7 @@ A pessoa referenciada precisa existir previamente.
   "street": "Rua das Flores, 100",
   "city": "Curitiba",
   "state": "PR",
-  "zipCode": "80010-000",
+  "zipCode": "80000-000",
   "country": "Brasil",
   "person": {
     "id": 101
@@ -132,12 +162,14 @@ A pessoa referenciada precisa existir previamente.
 
 Substitua o ID pelo identificador de uma pessoa existente.
 
-## Executar a aplicação
+## Configuração e execução
 
 ### Pré-requisitos
 
 - JDK 21
 - Maven ou Maven Wrapper incluído no projeto
+
+### Executar a aplicação
 
 Abra um terminal na raiz do projeto e execute:
 
@@ -147,32 +179,26 @@ Abra um terminal na raiz do projeto e execute:
 
 A API ficará disponível em `http://localhost:8080`.
 
-Para verificar se está respondendo, acesse `http://localhost:8080/api/health`.
-
 ## Banco de dados H2
 
 A aplicação utiliza H2 em memória. O banco é recriado quando a aplicação é reiniciada, e os dados iniciais definidos em `data.sql` são carregados novamente.
 
 ### Acessar o console H2
 
-Com a aplicação em execução, acesse:
-
-`http://localhost:8080/h2-console`
-
-Utilize as seguintes configurações:
+Com a aplicação em execução, acesse `http://localhost:8080/h2-console`.
 
 | Campo | Valor |
 |---|---|
 | Driver Class | `org.h2.Driver` |
 | JDBC URL | `jdbc:h2:mem:bjdb` |
 | User Name | `BJ` |
-| Password | Conforme a configuração da aplicação |
+| Password | "Null" |
 
-Confira a senha no arquivo de configuração do projeto. Se estiver vazia, deixe o campo Password em branco e clique em **Connect**.
+Confira a senha no arquivo de configuração. Está vazio, deixe o campo Password em branco e clique em **Connect**.
 
-### Consultar as pessoas cadastradas
+### Consultar pessoas
 
-No console H2, execute a seguinte consulta para listar pessoas e identificar se cada registro possui dados de aluno ou professor:
+Se quiser consultar Persons criadas, vá no console H2, execute:
 
 ```sql
 SELECT
@@ -195,17 +221,11 @@ LEFT JOIN PROFESSOR pr ON pr.ID = p.ID
 ORDER BY p.ID;
 ```
 
-Os `LEFT JOIN` permitem que a consulta retorne todas as pessoas, inclusive aquelas que não possuem registro nas tabelas de alunos ou professores.
-
-A coluna `PERSON_TYPE` facilita a identificação do tipo de registro:
-
-- `PERSON`: pessoa sem registro correspondente nas tabelas de aluno ou professor.
-- `STUDENT`: pessoa com registro na tabela de alunos.
-- `PROFESSOR`: pessoa com registro na tabela de professores.
+Os `LEFT JOIN` permitem retornar todas as pessoas, inclusive as que não possuem registro nas tabelas de alunos ou professores. A coluna `PERSON_TYPE` identifica o tipo de registro.
 
 ### Consultar endereços
 
-Para listar os endereços e os respectivos proprietários:
+Se quiser consultar Address criados, vá no console H2, execute:
 
 ```sql
 SELECT
@@ -224,39 +244,39 @@ ORDER BY a.ID;
 
 ### Importante sobre os dados
 
-O H2 está configurado em memória. Portanto:
-
 - Os dados cadastrados pela API são mantidos enquanto a aplicação estiver em execução.
 - Ao reiniciar a aplicação, o banco é recriado.
 - Os dados iniciais definidos em `data.sql` são carregados novamente.
 - Dados inseridos manualmente pelo console não permanecem após o reinício.
 
-## Executar os testes
+## Testes automatizados
 
-Para executar toda a suíte automatizada:
+Para executar toda a suíte de testes:
 
 ```powershell
 .\mvnw.cmd test
 ```
 
-Para executar individualmente um teste de integração, por exemplo:
+Para executar individualmente um teste de integração:
 
 ```powershell
 .\mvnw.cmd -Dtest=PersonRepositoryIntegrationTest test
 ```
 
-A suíte atual possui **48 testes aprovados**, incluindo testes unitários dos serviços e testes de integração dos repositórios com H2.
+A suíte contempla testes unitários dos serviços com JUnit e Mockito e testes de integração dos repositórios com H2.
 
-Os testes de integração verificam a persistência de pessoas, alunos, professores e endereços. Os testes unitários verificam os comportamentos dos serviços de forma isolada.
+### Cobertura dos testes
 
-## Estrutura da aplicação
+- **PersonServiceTests:** criação, listagem, busca por ID, atualização completa e parcial, exclusão e cenários com ID inexistente.
+- **StudentServiceTests:** operações CRUD, atualização parcial e validação dos atributos herdados e específicos de aluno.
+- **ProfessorServiceTests:** operações CRUD, atualização parcial e validação dos atributos herdados e do salário.
+- **AddressServiceTests:** operações CRUD, atualização da pessoa associada, validação da referência à pessoa e cenários com endereço ou pessoa inexistente.
+- **PersonRepositoryIntegrationTest:** persistência e recuperação de uma pessoa no H2.
+- **StudentRepositoryIntegrationTest:** persistência dos dados herdados e dos atributos específicos de aluno.
+- **ProfessorRepositoryIntegrationTest:** persistência dos dados herdados e do salário.
+- **AddressRepositoryIntegrationTest:** persistência do endereço e recuperação da pessoa associada.
 
-- **Model:** entidades e enumerações do domínio.
-- **Repository:** acesso e persistência dos dados usando Spring Data JPA.
-- **Service:** regras de negócio e operações sobre as entidades.
-- **Controller:** endpoints REST.
-- **Exception:** tratamento global e padronizado de erros.
-- **Test:** testes unitários e de integração.
+Os testes de serviço usam repositórios simulados para verificar a lógica da camada de negócio. Os testes de integração usam `@DataJpaTest` para validar a persistência via JPA e H2. Essa suíte não representa, por si só, testes automatizados de ponta a ponta dos endpoints HTTP.
 
 ## Tratamento de erros
 
@@ -265,12 +285,20 @@ A API utiliza `@RestControllerAdvice` para padronizar as respostas de erro.
 - **HTTP 404 — Not Found:** recurso não encontrado.
 - **HTTP 400 — Bad Request:** requisição inválida, como uma referência de pessoa ausente no cadastro de endereço.
 
-As respostas incluem informações como data e hora, código HTTP, descrição do erro e mensagem explicativa.
+As respostas incluem data e hora, código HTTP, descrição do erro e mensagem explicativa.
 
-## Decisões técnicas e melhorias futuras
+## Decisões técnicas
 
-- Alunos e professores recebem os atributos comuns de `Person` e os atributos específicos em uma única requisição.
-- Endereços são associados a pessoas por meio de `person.id`.
-- A lista de endereços é ignorada na serialização direta de `Person` para evitar recursão JSON. Uma resposta agregada poderá ser implementada futuramente com DTOs.
-- O campo `photo` representa uma referência textual; o upload de arquivos não está implementado.
-- Docker e frontend são etapas futuras do projeto.
+- **Herança com `InheritanceType.JOINED`:** os atributos comuns são armazenados em `PERSON`, enquanto os campos específicos ficam nas tabelas `STUDENT` e `PROFESSOR`.
+- **Relacionamento entre pessoa e endereço:** cada endereço referencia uma pessoa por meio de `person.id`.
+- **Serialização JSON:** a lista de endereços de `Person` é ignorada na serialização direta para evitar recursão JSON.
+- **Referência da foto:** o campo `photo` armazena uma referência textual; o upload de arquivos não está implementado.
+- **Banco H2 em memória:** facilita a execução local sem exigir a instalação de um banco externo. Os dados são recriados ao reiniciar a aplicação.
+
+## Melhorias futuras
+
+- Adicionar Docker e Docker Compose para facilitar a configuração e a execução do ambiente.
+- Desenvolver uma interface frontend para consumir a API.
+- Avaliar o uso de DTOs para controlar os dados de entrada e saída e permitir respostas agregadas com informações de pessoas e endereços.
+- Ampliar a cobertura automatizada com testes dos controllers e das respostas HTTP.
+- Avaliar melhorias de validação dos dados de entrada conforme os requisitos do projeto.

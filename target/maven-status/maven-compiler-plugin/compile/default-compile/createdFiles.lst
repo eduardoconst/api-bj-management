@@ -1,5 +1,0 @@
-br\com\bjmanagement\model\Status.class
-br\com\bjmanagement\exception\ResourceNotFoundException.class
-br\com\bjmanagement\exception\GlobalExceptionHandler.class
-br\com\bjmanagement\model\Person.class
-br\com\bjmanagement\ApiBjManagementApplication.class
