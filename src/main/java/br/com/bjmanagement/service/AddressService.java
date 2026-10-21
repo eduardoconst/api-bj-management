@@ -1,6 +1,7 @@
 
 package br.com.bjmanagement.service;
 
+import br.com.bjmanagement.exception.ResourceNotFoundException;
 import br.com.bjmanagement.model.Address;
 import br.com.bjmanagement.model.Person;
 import br.com.bjmanagement.repository.AddressRepository;
@@ -36,7 +37,7 @@ public class AddressService {
     public Address findById(Long id) {
         return addressRepository.findById(id)
                 .orElseThrow(() ->
-                        new RuntimeException(
+                        new ResourceNotFoundException(
                                 "Not Found by ID: " + id));
     }
 
@@ -96,8 +97,8 @@ public class AddressService {
         //Busca uma person real no banco antes de estabelecer o relacionamento
         return personRepository.findById(address.getPerson().getId())
                 .orElseThrow(() ->
-                        new RuntimeException(
-                                "Pessoa não encontrada com o ID: "
+                        new ResourceNotFoundException(
+                                "Person not found by ID: "
                                         + address.getPerson().getId()));
     }
 }

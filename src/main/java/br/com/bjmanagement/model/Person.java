@@ -1,5 +1,6 @@
 package br.com.bjmanagement.model;
 
+import jakarta.persistence.CascadeType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -30,7 +31,11 @@ public class Person {
 
     //Evita que a serialização da pessoa inclua os endereços, impedindo o ciclo address -> Person -> Address.
     @JsonIgnore
-    @OneToMany(mappedBy = "person")
+    @OneToMany(
+            mappedBy = "person",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
     private List<Address> addresses = new ArrayList<>();
 
     public Person() {

@@ -1,5 +1,6 @@
 package br.com.bjmanagement.service;
 
+import br.com.bjmanagement.exception.ResourceNotFoundException;
 import br.com.bjmanagement.model.Student;
 import br.com.bjmanagement.repository.StudentRepository;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public class StudentService {
     public Student findById(Long id) {
         return studentRepository.findById(id)
                 .orElseThrow(() ->
-                        new RuntimeException("Estudante não encontrado com o ID: " + id));
+                        new ResourceNotFoundException("Student not found by ID: " + id));
     }
 
     //update all items

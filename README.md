@@ -1,53 +1,57 @@
-# API de Gerenciamento Acadêmico
+# API BJ Management
 
-API REST em Java com Spring Boot para implementar CRUDs usando Spring Data JPA/Hibernate e banco H2 em memória.
+API REST desenvolvida em Java com Spring Boot para gerenciamento de pessoas, alunos, professores e endereços. Utiliza Spring Data JPA/Hibernate para persistência e H2 como banco de dados em memória.
 
 ## Tecnologias
 
 - Java 21
-- Spring Boot 4
+- Spring Boot 4.1.1
 - Maven
 - Spring Web
 - Spring Data JPA / Hibernate
 - H2 Database
-- JUnit / Spring Boot Test
+- JUnit, Mockito e Spring Boot Test
 
 ## Modelo de domínio
 
-- `Person`: nome, telefone, e-mail, status e relacionamento com endereços.
-- `Student extends Person`: número de matrícula e foto.
-- `Professor extends Person`: salário.
-- `Address`: rua, cidade, estado, CEP e país; cada endereço pertence a uma pessoa.
-- `Status`: `ACTIVE` ou `DISABLE`.
+- **Person:** nome, telefone, e-mail, status e relacionamento com endereços.
+- **Student:** herda os atributos de `Person` e adiciona número de matrícula e foto.
+- **Professor:** herda os atributos de `Person` e adiciona salário.
+- **Address:** rua, cidade, estado, CEP e país; cada endereço pertence a uma pessoa.
+- **Status:** `ACTIVE` ou `DISABLED`.
 
-A herança usa `InheritanceType.JOINED`: os atributos comuns ficam em `PERSON`, e os atributos específicos ficam em `STUDENT` ou `PROFESSOR`, relacionados pelo mesmo ID.
+A herança utiliza `InheritanceType.JOINED`: os atributos comuns ficam na tabela `PERSON`, enquanto os atributos específicos ficam nas tabelas `STUDENT` e `PROFESSOR`, relacionadas pelo mesmo ID.
 
-### Interpretação do diagrama
-
-O diagrama não esclarece se uma pessoa pode ser aluno e professor ao mesmo tempo, nem se é possível mudar de um tipo para outro. Para manter o escopo objetivo, esta implementação cria diretamente um `Student` ou um `Professor` por seus respectivos endpoints. Os tipos são tratados como cadastros distintos; conversão entre subtipos não foi implementada.
-
-A tabela `PERSON` isoladamente não contém uma coluna discriminadora de tipo. O tipo pode ser identificado pela existência do mesmo ID em `STUDENT` ou `PROFESSOR`, ou por uma consulta com `LEFT JOIN`.
+Uma pessoa pode possuir vários endereços, mas cada endereço pertence a uma única pessoa.
 
 ## Endpoints
+
+Todos os endpoints utilizam o prefixo `/api`.
+
+### Saúde da aplicação
+
+| Método | Endpoint | Descrição |
+|---|---|---|
+| GET | `/api/health` | Verificar se a API está respondendo |
 
 ### Pessoas
 
 | Método | Endpoint | Descrição |
 |---|---|---|
-| POST | `/api/persons` | Criar pessoa |
-| GET | `/api/persons` | Listar pessoas |
-| GET | `/api/persons/{id}` | Buscar pessoa |
-| PUT | `/api/persons/{id}` | Atualizar campos comuns |
-| PATCH | `/api/persons/{id}` | Atualizar parcialmente |
-| DELETE | `/api/persons/{id}` | Excluir pessoa |
+| POST | `/api/person` | Cadastrar pessoa |
+| GET | `/api/person` | Listar pessoas |
+| GET | `/api/person/{id}` | Buscar pessoa por ID |
+| PUT | `/api/person/{id}` | Atualizar pessoa |
+| PATCH | `/api/person/{id}` | Atualizar parcialmente |
+| DELETE | `/api/person/{id}` | Excluir pessoa |
 
 ### Alunos
 
 | Método | Endpoint | Descrição |
 |---|---|---|
-| POST | `/api/students` | Criar aluno |
+| POST | `/api/students` | Cadastrar aluno |
 | GET | `/api/students` | Listar alunos |
-| GET | `/api/students/{id}` | Buscar aluno |
+| GET | `/api/students/{id}` | Buscar aluno por ID |
 | PUT | `/api/students/{id}` | Atualizar aluno |
 | PATCH | `/api/students/{id}` | Atualizar parcialmente |
 | DELETE | `/api/students/{id}` | Excluir aluno |
@@ -56,9 +60,9 @@ A tabela `PERSON` isoladamente não contém uma coluna discriminadora de tipo. O
 
 | Método | Endpoint | Descrição |
 |---|---|---|
-| POST | `/api/professors` | Criar professor |
+| POST | `/api/professors` | Cadastrar professor |
 | GET | `/api/professors` | Listar professores |
-| GET | `/api/professors/{id}` | Buscar professor |
+| GET | `/api/professors/{id}` | Buscar professor por ID |
 | PUT | `/api/professors/{id}` | Atualizar professor |
 | PATCH | `/api/professors/{id}` | Atualizar parcialmente |
 | DELETE | `/api/professors/{id}` | Excluir professor |
@@ -67,37 +71,39 @@ A tabela `PERSON` isoladamente não contém uma coluna discriminadora de tipo. O
 
 | Método | Endpoint | Descrição |
 |---|---|---|
-| POST | `/api/addresses` | Criar endereço associado a uma pessoa |
+| POST | `/api/addresses` | Cadastrar endereço associado a uma pessoa |
 | GET | `/api/addresses` | Listar endereços |
-| GET | `/api/addresses/{id}` | Buscar endereço |
+| GET | `/api/addresses/{id}` | Buscar endereço por ID |
 | PUT | `/api/addresses/{id}` | Atualizar endereço |
 | PATCH | `/api/addresses/{id}` | Atualizar parcialmente |
 | DELETE | `/api/addresses/{id}` | Excluir endereço |
 
-### Saúde
-
-- `GET /api/health`: verifica se a API está respondendo.
+As operações de criação retornam HTTP 201 e as exclusões bem-sucedidas retornam HTTP 204.
 
 ## Exemplos de requisições
 
-### Criar aluno — `POST /api/students`
+### Cadastrar aluno
+
+`POST /api/students`
 
 ```json
 {
-  "name": "Eduardo Constantino",
+  "name": "João Silva",
   "phoneNumber": "41999999999",
-  "emailAddress": "ducontageral@email.com",
+  "emailAddress": "joao@email.com",
   "status": "ACTIVE",
   "studentNumber": "2026001",
-  "photo": "du.jpg"
+  "photo": "joao.jpg"
 }
 ```
 
-### Criar professor — `POST /api/professors`
+### Cadastrar professor
+
+`POST /api/professors`
 
 ```json
 {
-  "name": "Maria Antonieta",
+  "name": "Maria Oliveira",
   "phoneNumber": "41988887777",
   "emailAddress": "maria@universidade.com",
   "status": "ACTIVE",
@@ -105,9 +111,11 @@ A tabela `PERSON` isoladamente não contém uma coluna discriminadora de tipo. O
 }
 ```
 
-### Criar endereço — `POST /api/addresses`
+### Cadastrar endereço
 
-Substitua o ID abaixo pelo ID real de uma pessoa, aluno ou professor existente.
+`POST /api/addresses`
+
+A pessoa referenciada precisa existir previamente.
 
 ```json
 {
@@ -116,50 +124,64 @@ Substitua o ID abaixo pelo ID real de uma pessoa, aluno ou professor existente.
   "state": "PR",
   "zipCode": "80010-000",
   "country": "Brasil",
-  "person": { "id": 1 }
+  "person": {
+    "id": 101
+  }
 }
 ```
 
-O serviço verifica se a pessoa existe antes de associar o endereço.
+Substitua o ID pelo identificador de uma pessoa existente.
 
-## Banco H2
+## Executar a aplicação
 
-Console: `http://localhost:8080/h2-console`
+### Pré-requisitos
 
-- JDBC URL: `jdbc:h2:mem:bjdb`
-- User: `bj`
-- Password: em branco
+- JDK 21
+- Maven ou Maven Wrapper incluído no projeto
 
-O banco é em memória; os dados são perdidos quando a aplicação é encerrada ou reiniciada.
-
-## Executar
-
-Requisitos: JDK 21 e Maven. Também é possível executar a classe `ApiBjManagementApplication` pelo IntelliJ IDEA.
-
-```bash
-mvn spring-boot:run
-mvn test
-```
-
-No Windows, se o Maven Wrapper estiver configurado:
+Abra um terminal na raiz do projeto e execute:
 
 ```powershell
 .\mvnw.cmd spring-boot:run
-.\mvnw.cmd test
 ```
 
-## Consultar pessoas e tipos no H2
+A API ficará disponível em `http://localhost:8080`.
 
-Esta consulta lista todas as pessoas e exibe os dados específicos de aluno ou professor quando existirem:
+Para verificar se está respondendo, acesse `http://localhost:8080/api/health`.
+
+## Banco de dados H2
+
+A aplicação utiliza H2 em memória. O banco é recriado quando a aplicação é reiniciada, e os dados iniciais definidos em `data.sql` são carregados novamente.
+
+### Acessar o console H2
+
+Com a aplicação em execução, acesse:
+
+`http://localhost:8080/h2-console`
+
+Utilize as seguintes configurações:
+
+| Campo | Valor |
+|---|---|
+| Driver Class | `org.h2.Driver` |
+| JDBC URL | `jdbc:h2:mem:bjdb` |
+| User Name | `BJ` |
+| Password | Conforme a configuração da aplicação |
+
+Confira a senha no arquivo de configuração do projeto. Se estiver vazia, deixe o campo Password em branco e clique em **Connect**.
+
+### Consultar as pessoas cadastradas
+
+No console H2, execute a seguinte consulta para listar pessoas e identificar se cada registro possui dados de aluno ou professor:
 
 ```sql
 SELECT
     p.ID,
     p.NAME,
-    p.PHONENUMBER,
-    p.EMAILADDRESS,
+    p.PHONE_NUMBER,
+    p.EMAIL_ADDRESS,
     p.STATUS,
-    s.STUDENTNUMBER,
+    s.STUDENT_NUMBER,
     s.PHOTO,
     pr.SALARY,
     CASE
@@ -173,17 +195,82 @@ LEFT JOIN PROFESSOR pr ON pr.ID = p.ID
 ORDER BY p.ID;
 ```
 
-Os `LEFT JOIN`s mantêm na consulta pessoas que não possuem registro em `STUDENT` ou `PROFESSOR`.
+Os `LEFT JOIN` permitem que a consulta retorne todas as pessoas, inclusive aquelas que não possuem registro nas tabelas de alunos ou professores.
 
-## Dados de teste
+A coluna `PERSON_TYPE` facilita a identificação do tipo de registro:
 
-É possível cadastrar dados manualmente pelos endpoints ou executar SQL no console H2. Como o banco é recriado ao iniciar a aplicação, dados inseridos manualmente precisam ser cadastrados novamente após reiniciar.
+- `PERSON`: pessoa sem registro correspondente nas tabelas de aluno ou professor.
+- `STUDENT`: pessoa com registro na tabela de alunos.
+- `PROFESSOR`: pessoa com registro na tabela de professores.
 
-Os testes automatizados devem preparar seus próprios dados e verificar os resultados sem depender de registros inseridos manualmente. Testes verificam comportamento; não substituem as instruções de configuração do ambiente.
+### Consultar endereços
 
-## Decisões e melhorias futuras
+Para listar os endereços e os respectivos proprietários:
 
-- Alunos e professores recebem os atributos comuns herdados de `Person` e os atributos específicos em uma única requisição.
-- `Address` recebe a referência à pessoa pelo campo `person.id`.
-- Para evitar serialização JSON recursiva entre `Person.addresses` e `Address.person`, a lista de endereços é ignorada na serialização direta de `Person`. Uma resposta agregada poderá ser implementada futuramente com DTOs.
-- Próximas melhorias: tratamento padronizado de exceções, validação de entrada, testes automatizados de CRUD, Docker e upload real de foto.
+```sql
+SELECT
+    a.ID,
+    a.STREET,
+    a.CITY,
+    a.STATE,
+    a.ZIP_CODE,
+    a.COUNTRY,
+    a.PERSON_ID,
+    p.NAME AS PERSON_NAME
+FROM ADDRESS a
+JOIN PERSON p ON p.ID = a.PERSON_ID
+ORDER BY a.ID;
+```
+
+### Importante sobre os dados
+
+O H2 está configurado em memória. Portanto:
+
+- Os dados cadastrados pela API são mantidos enquanto a aplicação estiver em execução.
+- Ao reiniciar a aplicação, o banco é recriado.
+- Os dados iniciais definidos em `data.sql` são carregados novamente.
+- Dados inseridos manualmente pelo console não permanecem após o reinício.
+
+## Executar os testes
+
+Para executar toda a suíte automatizada:
+
+```powershell
+.\mvnw.cmd test
+```
+
+Para executar individualmente um teste de integração, por exemplo:
+
+```powershell
+.\mvnw.cmd -Dtest=PersonRepositoryIntegrationTest test
+```
+
+A suíte atual possui **48 testes aprovados**, incluindo testes unitários dos serviços e testes de integração dos repositórios com H2.
+
+Os testes de integração verificam a persistência de pessoas, alunos, professores e endereços. Os testes unitários verificam os comportamentos dos serviços de forma isolada.
+
+## Estrutura da aplicação
+
+- **Model:** entidades e enumerações do domínio.
+- **Repository:** acesso e persistência dos dados usando Spring Data JPA.
+- **Service:** regras de negócio e operações sobre as entidades.
+- **Controller:** endpoints REST.
+- **Exception:** tratamento global e padronizado de erros.
+- **Test:** testes unitários e de integração.
+
+## Tratamento de erros
+
+A API utiliza `@RestControllerAdvice` para padronizar as respostas de erro.
+
+- **HTTP 404 — Not Found:** recurso não encontrado.
+- **HTTP 400 — Bad Request:** requisição inválida, como uma referência de pessoa ausente no cadastro de endereço.
+
+As respostas incluem informações como data e hora, código HTTP, descrição do erro e mensagem explicativa.
+
+## Decisões técnicas e melhorias futuras
+
+- Alunos e professores recebem os atributos comuns de `Person` e os atributos específicos em uma única requisição.
+- Endereços são associados a pessoas por meio de `person.id`.
+- A lista de endereços é ignorada na serialização direta de `Person` para evitar recursão JSON. Uma resposta agregada poderá ser implementada futuramente com DTOs.
+- O campo `photo` representa uma referência textual; o upload de arquivos não está implementado.
+- Docker e frontend são etapas futuras do projeto.

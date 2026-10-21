@@ -1,1 +1,9 @@
+br\com\bjmanagement\repository\AddressRepositoryIntegrationTest.class
+br\com\bjmanagement\service\PersonServiceTests.class
+br\com\bjmanagement\repository\PersonRepositoryIntegrationTest.class
 br\com\bjmanagement\ApiBjManagementApplicationTests.class
+br\com\bjmanagement\service\ProfessorServiceTests.class
+br\com\bjmanagement\repository\ProfessorRepositoryIntegrationTest.class
+br\com\bjmanagement\repository\StudentRepositoryIntegrationTest.class
+br\com\bjmanagement\service\AddressServiceTests.class
+br\com\bjmanagement\service\StudentServiceTests.class

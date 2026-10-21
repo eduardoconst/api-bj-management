@@ -1,5 +1,6 @@
 package br.com.bjmanagement.service;
 
+import br.com.bjmanagement.exception.ResourceNotFoundException;
 import br.com.bjmanagement.model.Person;
 import br.com.bjmanagement.repository.PersonRepository;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class PersonService {
 
     public Person findById(Long id) {
         return personRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException(
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "Person not found by ID: " + id
                 ));
     }

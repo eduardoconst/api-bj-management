@@ -1,6 +1,7 @@
 
 package br.com.bjmanagement.service;
 
+import br.com.bjmanagement.exception.ResourceNotFoundException;
 import br.com.bjmanagement.model.Professor;
 import br.com.bjmanagement.repository.ProfessorRepository;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,8 @@ public class ProfessorService {
     public Professor findById(Long id) {
         return professorRepository.findById(id)
                 .orElseThrow(() ->
-                        new RuntimeException(
-                                "Professor não encontrado com o ID: " + id));
+                        new ResourceNotFoundException(
+                                "Professor not found by ID: " + id));
     }
 
     public Professor update(Long id, Professor professor) {

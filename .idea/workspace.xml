@@ -5,23 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d96a696-9a3e-43f3-a800-49375a85fa5b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/controller/AddressController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/controller/ProfessorController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/controller/StudentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/repository/AddressRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/repository/ProfessorRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/repository/StudentRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/service/AddressService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/service/ProfessorService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/service/StudentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/data.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/exception/ResourceNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/br/com/bjmanagement/repository/AddressRepositoryIntegrationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/br/com/bjmanagement/repository/PersonRepositoryIntegrationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/br/com/bjmanagement/repository/ProfessorRepositoryIntegrationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/br/com/bjmanagement/repository/StudentRepositoryIntegrationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/br/com/bjmanagement/service/AddressServiceTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/br/com/bjmanagement/service/PersonServiceTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/br/com/bjmanagement/service/ProfessorServiceTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/br/com/bjmanagement/service/StudentServiceTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/controller/PersonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/controller/PersonController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/controller/AddressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/controller/AddressController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/controller/ProfessorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/controller/ProfessorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/controller/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/controller/StudentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/model/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/model/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/service/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/service/AddressService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/service/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/service/PersonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/bjmanagement/controller/PersonController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/bjmanagement/controller/PersonController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/service/ProfessorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/service/ProfessorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/bjmanagement/service/StudentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/br/com/bjmanagement/ApiBjManagementApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/br/com/bjmanagement/ApiBjManagementApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/bjmanagement/model/Person.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/bjmanagement/model/Person.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/com/bjmanagement/service/PersonService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/bjmanagement/service/PersonService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-br.com.bjmanagement.ApiBjManagementApplicationTests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-br.com.bjmanagement.ApiBjManagementApplicationTests.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/br.com.bjmanagement.ApiBjManagementApplicationTests.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/br.com.bjmanagement.ApiBjManagementApplicationTests.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,61 +68,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0000000256002746" />
-      <entry key="S2" value="1.0207352032840875" />
-      <entry key="S5" value="1.361280115492272" />
-      <entry key="S10" value="2.1684329494368155" />
-      <entry key="S30" value="4.241755198448608" />
-      <entry key="S60" value="5.370254487474116" />
-      <entry key="M2" value="6.152542313070446" />
-      <entry key="M5" value="7.140714891457711" />
-      <entry key="M10" value="8.035209113077602" />
-      <entry key="M15" value="8.518315531879768" />
-      <entry key="M30" value="9.155723019844686" />
-      <entry key="H1" value="9.980538435745432" />
-      <entry key="H2" value="17.341762146489373" />
-      <entry key="H4" value="42.39758490652371" />
-      <entry key="D1" value="120.91506196146454" />
-      <entry key="W1" value="147.07219979737096" />
+      <entry key="MS100" value="1.4536843020165942" />
+      <entry key="MS500" value="2.957283072597026" />
+      <entry key="S2" value="4.293265503218595" />
+      <entry key="S5" value="4.696295762209851" />
+      <entry key="S10" value="4.844394643126296" />
+      <entry key="S30" value="4.947272688916021" />
+      <entry key="S60" value="4.973527426904412" />
+      <entry key="M2" value="4.987079999104279" />
+      <entry key="M5" value="5.089266302915517" />
+      <entry key="M10" value="5.6175218238936315" />
+      <entry key="M15" value="6.205727433228367" />
+      <entry key="M30" value="9.838994914946937" />
+      <entry key="H1" value="31.522975089722536" />
+      <entry key="H2" value="81.50879710577512" />
+      <entry key="H4" value="149.30410943938313" />
+      <entry key="D1" value="305.1802999537993" />
+      <entry key="W1" value="357.0851583082787" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="7.209753641490023E-105" />
-      <entry key="S5" value="2.2037815888493275E-42" />
-      <entry key="S10" value="1.4862182315546871E-21" />
-      <entry key="S30" value="1.3224347571632767E-7" />
-      <entry key="S60" value="5.272622165965814E-4" />
-      <entry key="M2" value="0.03784781448307751" />
-      <entry key="M5" value="0.5309736727259322" />
-      <entry key="M10" value="1.3657155929482114" />
-      <entry key="M15" value="1.9143947183194236" />
-      <entry key="M30" value="2.7344642046136163" />
-      <entry key="H1" value="3.3728974199042145" />
-      <entry key="H2" value="4.871452813289074" />
-      <entry key="H4" value="9.250016998903266" />
-      <entry key="D1" value="23.29767201836252" />
-      <entry key="W1" value="28.091712064960646" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="5.630021022318758E-145" />
+      <entry key="S60" value="1.0879139152492492E-72" />
+      <entry key="M2" value="1.7191934451095964E-36" />
+      <entry key="M5" value="9.727171301152024E-15" />
+      <entry key="M10" value="1.8484897895974038E-7" />
+      <entry key="M15" value="5.046644111788655E-5" />
+      <entry key="M30" value="0.014039700347813973" />
+      <entry key="H1" value="0.24168290428587236" />
+      <entry key="H2" value="1.3040069292838523" />
+      <entry key="H4" value="4.785785509000539" />
+      <entry key="D1" value="20.874414853106018" />
+      <entry key="W1" value="27.65439599262322" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9265880618903709" />
-      <entry key="MS500" value="0.9848664674293008" />
-      <entry key="S2" value="1.0166766901600126" />
-      <entry key="S5" value="1.3580375726628944" />
-      <entry key="S10" value="2.1651781810263793" />
-      <entry key="S30" value="4.239505398333583" />
-      <entry key="S60" value="5.369337370662642" />
-      <entry key="M2" value="6.188716520075274" />
-      <entry key="M5" value="7.6665058505194175" />
-      <entry key="M10" value="9.39408737644009" />
-      <entry key="M15" value="10.4260938857921" />
-      <entry key="M30" value="11.885223117937732" />
-      <entry key="H1" value="13.350269701463747" />
-      <entry key="H2" value="22.210826405182697" />
-      <entry key="H4" value="51.64528190684209" />
-      <entry key="D1" value="144.21176755032744" />
-      <entry key="W1" value="175.16374600835684" />
+      <entry key="MS100" value="1.4139332283320154" />
+      <entry key="MS500" value="2.9409297960200065" />
+      <entry key="S2" value="4.287317896979703" />
+      <entry key="S5" value="4.693692304774914" />
+      <entry key="S10" value="4.8430516779140484" />
+      <entry key="S30" value="4.946815484961551" />
+      <entry key="S60" value="4.97329760644619" />
+      <entry key="M2" value="4.9869647704485285" />
+      <entry key="M5" value="5.089218733421994" />
+      <entry key="M10" value="5.617484391886471" />
+      <entry key="M15" value="6.205716263325652" />
+      <entry key="M30" value="9.852869062377247" />
+      <entry key="H1" value="31.76424502210739" />
+      <entry key="H2" value="82.81199707704081" />
+      <entry key="H4" value="154.08857798094002" />
+      <entry key="D1" value="326.053822725341" />
+      <entry key="W1" value="384.7393870860781" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -121,34 +137,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "Spring Boot.ApiBjManagementApplication.executor": "Run",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "MavenSettings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ApiBjManagementApplication.executor&quot;: &quot;Run&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\EduardoFerreiraConst\projetos-eduardo\api-bj-management" />
